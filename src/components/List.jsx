@@ -7,7 +7,7 @@ const List = () => {
 
   const listData = dummyData.map((item, i) => {
     return (
-    <div style={{display: 'grid', gridTemplateColumns: '4fr 1fr 1fr 1fr' }} key={i}>
+    <div className='grid grid-cols-[4fr_1fr_1fr_1fr]' key={i}>
       <p className="name">{item.name}</p>
       {/* <p className="phone">{item.phone}</p> */}
       <p className="size">{item.partySize}</p>
