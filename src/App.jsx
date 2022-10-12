@@ -4,6 +4,11 @@ import WaitlistForm from './components/WaitlistForm'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, } from 'react-router-dom'
 
 function App() {
+  const [form, setForm] = useState(false)
+
+  useEffect(() => {
+    console.log(form)
+  }, [form])
   return (
     <Router>
       <div id="app" className="bg-purple-100 flex flex-col items-center justify-center">
@@ -12,9 +17,10 @@ function App() {
         </header>
         <Link 
           id="button" 
-          to='/waitlist-form'
+          to={form? '/waitlist-form' : '/'}
           // navigate to form
-          className="py-2 px-8 mt-2 mb-8 bg-green-400  hover:bg-green-500 shadow-md hover:shadow-lg rounded-full text-lg uppercase tracking-widest text-gray-100 font-bold">Join
+          onClick={()=> setForm(prevState => !prevState)}
+          className={`py-2 px-8 mt-2 mb-8 ${form ? "bg-green-400  hover:bg-green-500" : "bg-red-400 hover:bg-red-500" } shadow-md hover:shadow-lg rounded-full text-lg uppercase tracking-widest text-gray-100 font-bold`}>{form? 'Join' : 'Back'}
         </Link>
         <Routes>
           <Route path='/' element={<List/>}/>
