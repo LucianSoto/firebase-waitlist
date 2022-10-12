@@ -34,10 +34,6 @@ const List = () => {
     }
     fetchList()
   },[])
-  
-
-  console.log(list)
-  // console.log(mounted.current)
 
   
   return (
