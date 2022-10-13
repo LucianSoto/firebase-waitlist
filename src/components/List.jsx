@@ -37,7 +37,7 @@ const List = () => {
 
   
   return (
-    <div className='flex flex-col items-center bg-gray-100 h-5/6 w-5/6 rounded-md shadow-lg p-4'>
+    <div className='flex flex-col items-center bg-gray-100 h-5/6 w-5/6 rounded-md shadow-lg p-4 mb-8'>
       {list ? 
       list.map((item, i) => {
         return (

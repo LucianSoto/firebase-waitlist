@@ -4,7 +4,7 @@ import WaitlistForm from './components/WaitlistForm'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, } from 'react-router-dom'
 
 function App() {
-  const [form, setForm] = useState(false)
+  const [form, setForm] = useState(true)
 
   // useEffect(() => {
   //   console.log(form)

@@ -1,6 +1,11 @@
 import React, { useState }from 'react'
 
 const WaitlistForm = () => {
+
+  const submitForm = () => {
+    console.log('clicked')
+  }
+
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -15,8 +20,6 @@ const WaitlistForm = () => {
 
   const onChange = (e) => {
     const {name, value, } = e.target
-
-      console.log(formData)
       setFormData((prevState) => ({
         ...prevState, [name]: value
       }))
@@ -26,9 +29,9 @@ const WaitlistForm = () => {
     <form
       // onSubmit={onSubmit} 
       id="form" 
-      className='flex flex-col items-center bg-gray-100 h-5/6 w-5/6 rounded-md shadow-lg p-4'
+      className='flex flex-col items-center bg-gray-100  h-3/5 w-5/6 rounded-md shadow-lg p-4 mb-8'
     >
-      <h3 className='text-2xl font-medium mt-2 mb-8'>
+      <h3 className='text-2xl font-medium mt-8 mb-8'>
         Join out waitlist
       </h3>
       <label className={formStyles.label} htmlFor="fullName">Full Name</label>
@@ -55,8 +58,8 @@ const WaitlistForm = () => {
         minLength='9'
         onChange={onChange}
       />
-      <div id="other-options" className='w-3/4 flex justify-around mt-6'>
-        <span className=''>
+      <div id="other-options" className='w-3/4 flex justify-around mt-6 mb-12'>
+        <span className='flex w-3/8 '>
           <label className={formStyles.label} htmlFor="size">Size</label>
           <select 
             className='h-8 text-lg px-2 ml-4'
@@ -75,7 +78,7 @@ const WaitlistForm = () => {
             <option value="8">8</option>
           </select>
         </span>
-        <span className='flex  w-1/2'>
+        <span className='flex  w-1/4 mr-4'>
           <label className={formStyles.label} htmlFor="ofAge">Over 21</label>
           <input 
             // className="w-8 h-8" to style with tailwind would have to download @tailwind/forms 
@@ -90,7 +93,7 @@ const WaitlistForm = () => {
           />
         </span>
       </div>
-      
+      <div onClick={()=> submitForm()} className='bg-purple-300 hover:bg-purple-400 shadow-md hover:shadow-lg px-8 py-4 text-xl uppercase font-bold text-gray-100 rounded-full' id="submit">Submit</div>
     </form>
   )
 }
