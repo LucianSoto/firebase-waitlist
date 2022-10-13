@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate, } from 'react-r
 function App() {
   const [form, setForm] = useState(false)
 
-  useEffect(() => {
-    console.log(form)
-  }, [form])
+  // useEffect(() => {
+  //   console.log(form)
+  // }, [form])
   return (
     <Router>
       <div id="app" className="bg-purple-100 flex flex-col items-center justify-center">
