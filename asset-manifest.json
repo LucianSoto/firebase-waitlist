@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/LucianAiolos/firebase-waitlist/static/css/main.21d17950.css",
-    "main.js": "/LucianAiolos/firebase-waitlist/static/js/main.fa94ca10.js",
+    "main.css": "/LucianAiolos/firebase-waitlist/static/css/main.bb4d3f4e.css",
+    "main.js": "/LucianAiolos/firebase-waitlist/static/js/main.90935f60.js",
     "static/js/787.35bfbe55.chunk.js": "/LucianAiolos/firebase-waitlist/static/js/787.35bfbe55.chunk.js",
     "index.html": "/LucianAiolos/firebase-waitlist/index.html",
-    "main.21d17950.css.map": "/LucianAiolos/firebase-waitlist/static/css/main.21d17950.css.map",
-    "main.fa94ca10.js.map": "/LucianAiolos/firebase-waitlist/static/js/main.fa94ca10.js.map",
+    "main.bb4d3f4e.css.map": "/LucianAiolos/firebase-waitlist/static/css/main.bb4d3f4e.css.map",
+    "main.90935f60.js.map": "/LucianAiolos/firebase-waitlist/static/js/main.90935f60.js.map",
     "787.35bfbe55.chunk.js.map": "/LucianAiolos/firebase-waitlist/static/js/787.35bfbe55.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.21d17950.css",
-    "static/js/main.fa94ca10.js"
+    "static/css/main.bb4d3f4e.css",
+    "static/js/main.90935f60.js"
   ]
 }
