@@ -32,7 +32,7 @@ const WaitlistForm = () => {
       timestamp: serverTimestamp()
     }
     const waitlistRef = await addDoc(collection(db, 'waitlist-1'), dataCopy)
-    navigate("/")
+    navigate("/firebase-waitllist")
   }
 
   return (
