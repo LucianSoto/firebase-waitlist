@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { doc, deleteDoc } from 'firebase/firestore'
 
 
 const Modal = ({showModal, closeModal, modalItem }) => {
@@ -16,6 +17,10 @@ const Modal = ({showModal, closeModal, modalItem }) => {
     cursor: "pointer"
   }
 
+
+
+  // console.log(modalItem)
+
   return (
     <div 
       id="backdrop" 
@@ -25,20 +30,19 @@ const Modal = ({showModal, closeModal, modalItem }) => {
       <div id="menu" className='relative inset-0 z-10 overflow-y-auto bg-gray-100 w-3/4 rounded-lg p-8 flex flex-col items-center justfy-center' >
         <p 
         id="close" 
-          className=' w-8 h-8 relative float-right -left-64  -top-4 z-100 text-xl border-solid border-4 rounded-full border-gray-500 flex items-center justify-center font-bold text-gray-500 cursor-pointer'
-          onClick={()=> closeModal}
+          className=' w-8 h-8 relative float-right -left-64  -top-4 z-100 text-xl border-solid border-4 rounded-full border-gray-500 flex items-center justify-center font-bold text-gray-500 hover:border-gray-600 hover:text-gray-600 hover:shadow-sm cursor-pointer'
+          onClick={()=> closeModal()}
         >X</p>
-        <h3 className='text-3xl font-bold mb-8'>What would you like to do to {modalItem.name}?</h3>
+        <h3 className='text-3xl font-bold mb-8'>What would you like to do to 's party?</h3>
         <p 
           id="text"  
-          className='bg-green-400' 
+          className='bg-green-400 hover:bg-green-500' 
           style={buttonStyles}
-
         >  
             Text
         </p>
-        <p id="edit" className='bg-amber-400' style={buttonStyles}>Edit</p>
-        <p id="del" className='bg-red-400' style={buttonStyles}>Delete</p>
+        <p id="edit" className='bg-amber-400 hover:bg-amber-500' style={buttonStyles}>Edit</p>
+        <p id="del" className='bg-red-400 hover:bg-red-500' style={buttonStyles}>Delete</p>
       </div>
     </div>
   )

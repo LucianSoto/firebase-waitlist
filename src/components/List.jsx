@@ -21,17 +21,14 @@ const List = () => {
     // }
     const fetchList = async () => {
         const q = query(collection(db, 'waitlist-1'))
-    
         const querySnap = await getDocs(q)
-    
         let listArr = []
     
         querySnap.forEach((doc) => {
           return listArr.push(
             doc.data()
           )
-        })
-        
+        }) 
         setList(listArr)
         setIsLoading(false)
     }
@@ -41,13 +38,15 @@ const List = () => {
   const showModal = (e, phone, name) => {
     e.preventDefault()
     setModal(!modal)
-    setModalItem({phone: phone, name: name})
+    setModalItem({phone: phone, name: name, })
     console.log(phone, name, ' modal Item')
   }
 
   const closeModal = () => {
     setModal(!modal)
   }
+
+  console.log(list)
   
   return (
     <>
@@ -56,8 +55,7 @@ const List = () => {
       list.map((item, i) => {
         return (
           <ListItem
-            // id={item.id}
-            key={i}
+            id={i}
             name={item.name}
             size={item.size}
             ofAge={item.ofAge}
@@ -70,7 +68,9 @@ const List = () => {
        "laoding..."
       }
     </div>
+    {modal &&
     <Modal showModal={modal} modalItem={modalItem} closeModal={closeModal}/>
+    }
     </>
   )
 }
