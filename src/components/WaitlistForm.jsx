@@ -2,6 +2,7 @@ import React, { useState }from 'react'
 import { doc, addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 const WaitlistForm = () => {
   const navigate = useNavigate()
@@ -26,13 +27,12 @@ const WaitlistForm = () => {
     }
     
   const submitForm = async () => {
-    console.log(formData)
     const dataCopy = {
       ...formData,
       timestamp: serverTimestamp()
     }
     const waitlistRef = await addDoc(collection(db, 'waitlist-1'), dataCopy)
-    navigate("/firebase-waitllist")
+    navigate("/firebase-waitlist")
   }
 
   return (
@@ -63,8 +63,8 @@ const WaitlistForm = () => {
         className={formStyles.input}
         placeholder="123456789"
         value={formData.phone}
-        maxLength='9'
-        minLength='9'
+        maxLength='10'
+        minLength='7'
         onChange={onChange}
       />
       <div id="other-options" className='w-3/4 flex justify-around mt-6 mb-4'>
@@ -102,7 +102,7 @@ const WaitlistForm = () => {
           />
         </span>
       </div>
-      <div onClick={()=> submitForm()} className='bg-purple-300 hover:bg-purple-400 mb-8 shadow-md hover:cursor-pointer         hover:shadow-lg px-8 py-4 text-xl uppercase font-bold text-gray-100 rounded-full' id="submit">Submit</div>
+      <button onClick={()=> submitForm()} className='bg-purple-300 hover:bg-purple-400 mb-8 shadow-md hover:cursor-pointer         hover:shadow-lg px-8 py-4 text-xl uppercase font-bold text-gray-100 rounded-full' id="submit">Submit</button>
     </form>
   )
 }
