@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 // import { doc, deleteDoc } from 'firebase/firestore'
-import { db } from '../firebase.config'
+// import { db } from '../firebase.config'
 import { useEffect } from 'react'
 
 

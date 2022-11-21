@@ -5,7 +5,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { collection, getDocs, doc, query, where, deleteDoc, getDoc} from 'firebase/firestore'
 import { db } from '../firebase.config'
 import Modal from './Modal'
-import { get } from 'immer/dist/internal'
+// import { get } from 'immer/dist/internal'
 
 const List = () => {
   const [isLoading, setIsLoading] = useState(true)
