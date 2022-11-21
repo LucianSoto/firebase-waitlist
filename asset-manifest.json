@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/firebase-waitlist/static/css/main.b9ac2a1e.css",
-    "main.js": "/firebase-waitlist/static/js/main.51186761.js",
+    "main.js": "/firebase-waitlist/static/js/main.cb6c5fd4.js",
     "static/js/787.35bfbe55.chunk.js": "/firebase-waitlist/static/js/787.35bfbe55.chunk.js",
     "index.html": "/firebase-waitlist/index.html",
     "main.b9ac2a1e.css.map": "/firebase-waitlist/static/css/main.b9ac2a1e.css.map",
-    "main.51186761.js.map": "/firebase-waitlist/static/js/main.51186761.js.map",
+    "main.cb6c5fd4.js.map": "/firebase-waitlist/static/js/main.cb6c5fd4.js.map",
     "787.35bfbe55.chunk.js.map": "/firebase-waitlist/static/js/787.35bfbe55.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b9ac2a1e.css",
-    "static/js/main.51186761.js"
+    "static/js/main.cb6c5fd4.js"
   ]
 }
