@@ -27,17 +27,17 @@ const List = () => {
     
         querySnap.forEach((doc) => {
           const id = doc.id
-          console.log(doc.id)
+          const newDoc = doc.data()
+          newDoc["id"] = id
           return listArr.push(
-            doc.data() 
+            newDoc  
           )
         }) 
         setList(listArr)
-        console.log(listArr, 'list arr')
         setIsLoading(false)
     }
     fetchList()
-  },[])
+  },[list])
 
   const showModal = (e, phone, name, id) => {
     e.preventDefault()
@@ -46,20 +46,23 @@ const List = () => {
   }
 
   const closeModal = () => {
-    console.log('closing modal')
     setModal(!modal)
   }
 
   const onDelete = async () => {
-    console.log(modalItem.name)
-    const name = modalItem.name
-    const collectionRef = collection(db, 'waitlist-1')
-    const q = query(collectionRef, where("name", "==", name))
-    const snapshot = await getDocs(q)
-
-    const result = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-
-    console.log(result)
+    console.log(modalItem.id, 'ID')
+    // const name = modalItem.name
+    // const collectionRef = collection(db, 'waitlist-1')
+    // const q = query(collectionRef, where("name", "==", name))
+    // const snapshot = await getDocs(q)
+    // // console.log(snapshot, "snapshot")
+    // const result = snapshot.doc.data()
+  
+    // console.log(result, 'result')
+    
+    const docRef = doc(db, 'waitlist-1', modalItem.id)
+    await deleteDoc(docRef)
+    closeModal()
   }
 
   return (
@@ -67,10 +70,9 @@ const List = () => {
     <div className='flex flex-col items-center bg-gray-100 h-5/6 w-5/6 rounded-md shadow-lg p-4 mb-8'>
       { list.length > 0  ? 
       list.map((item, i) => {
-        console.log(item, )
         return (
           <ListItem
-            id={i}
+            id={item.id}
             name={item.name}
             size={item.size}
             ofAge={item.ofAge}
