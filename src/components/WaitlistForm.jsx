@@ -1,18 +1,19 @@
 import React, { useState }from 'react'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../firebase.config'
+import { useNavigate } from 'react-router-dom'
+// import { v4 as uuidv4 } from 'uuid'
 
-const WaitlistForm = () => {
-
-  const submitForm = () => {
-    console.log('clicked')
-  }
-
+const WaitlistForm = ({closeForm}) => {
+  const navigate = useNavigate()
+  
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     phone: '',
     size: 1,
     ofAge: false,
   })
-
+  
   const formStyles = {
     input : 'w-3/4 px-4 py-2 mb-6 rounded-lg text-xl',
     label : 'w-3/4 pl-2 mb-2 text-xl' 
@@ -23,25 +24,37 @@ const WaitlistForm = () => {
       setFormData((prevState) => ({
         ...prevState, [name]: value
       }))
+    }
+
+
+  const submitForm = async (e) => {
+    e.preventDefault()
+    const dataCopy = {
+      ...formData,
+      timestamp: serverTimestamp()
+    }
+    const waitlistRef = await addDoc(collection(db, 'waitlist-1'), dataCopy)
+    await closeForm(e)
+    navigate("/firebase-waitlist")
   }
 
   return (
     <form
-      // onSubmit={onSubmit} 
       id="form" 
-      className='flex flex-col items-center bg-gray-100  h-3/5 w-5/6 rounded-md shadow-lg p-4 mb-8'
+      className='flex flex-col items-center bg-gray-100  w-5/6 rounded-md shadow-lg p-4 mb-8'
+      onSubmit={submitForm}
     >
       <h3 className='text-2xl font-medium mt-8 mb-8'>
         Join out waitlist
       </h3>
-      <label className={formStyles.label} htmlFor="fullName">Full Name</label>
+      <label className={formStyles.label} htmlFor="name">Full Name</label>
       <input 
         type="text" 
-        name="fullName"
-        id="fullName"
+        name="name"
+        id="name"
         className={formStyles.input}
         placeholder="Name"
-        value={formData.fullName}
+        value={formData.name}
         maxLength='25'
         minLength='2'
         onChange={onChange}
@@ -54,11 +67,11 @@ const WaitlistForm = () => {
         className={formStyles.input}
         placeholder="123456789"
         value={formData.phone}
-        maxLength='9'
-        minLength='9'
+        maxLength='10'
+        minLength='7'
         onChange={onChange}
       />
-      <div id="other-options" className='w-3/4 flex justify-around mt-6 mb-12'>
+      <div id="other-options" className='w-3/4 flex justify-around mt-6 mb-4'>
         <span className='flex w-3/8 '>
           <label className={formStyles.label} htmlFor="size">Size</label>
           <select 
@@ -93,7 +106,8 @@ const WaitlistForm = () => {
           />
         </span>
       </div>
-      <div onClick={()=> submitForm()} className='bg-purple-300 hover:bg-purple-400 shadow-md hover:shadow-lg px-8 py-4 text-xl uppercase font-bold text-gray-100 rounded-full' id="submit">Submit</div>
+      <button type='submit'
+        className='bg-purple-300 hover:bg-purple-400 mb-8 shadow-md hover:cursor-pointer         hover:shadow-lg px-8 py-4 text-xl uppercase font-bold text-gray-100 rounded-full' id="submit">Submit</button>
     </form>
   )
 }
