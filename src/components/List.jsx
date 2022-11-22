@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import ListItem from './ListItem'
 import { FaCheck } from 'react-icons/fa'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { collection, getDocs, doc, query, where, deleteDoc, getDoc} from 'firebase/firestore'
+import { collection, getDocs, doc, query, where, deleteDoc, getDoc, orderBy} from 'firebase/firestore'
 import { db } from '../firebase.config'
 import Modal from './Modal'
 // import { get } from 'immer/dist/internal'
@@ -21,7 +21,7 @@ const List = () => {
     //   mounted.current = true
     // }
     const fetchList = async () => {
-        const q = query(collection(db, 'waitlist-1'))
+        const q = query(collection(db, 'waitlist-1'), orderBy("timestamp"))
         const querySnap = await getDocs(q)
         let listArr = []
     
@@ -54,6 +54,8 @@ const List = () => {
     await deleteDoc(docRef)
     closeModal()
   }
+
+  console.log(list)
 
   return (
     <>
