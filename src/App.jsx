@@ -17,7 +17,8 @@ function App() {
     
   }, [form])
 
-  const closeForm = () => {
+  const closeForm = (e) => {
+    e.preventDefault()
     console.log('closing form')
     setForm(prevState => !prevState)
   }
@@ -40,7 +41,7 @@ function App() {
         </Link>
         <Routes>
           <Route exact path='/firebase-waitlist' element={<List/>} end/>
-          <Route path='/waitlist-form' closeForm={closeForm} element={<WaitlistForm/>} />
+          <Route path='/waitlist-form' element={<WaitlistForm closeForm={closeForm}/>} />
         </Routes>
       </div>
     </Router>

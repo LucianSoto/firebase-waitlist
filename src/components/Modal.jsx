@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 
 
 const Modal = ({showModal, closeModal, modalItem, onDelete }) => {
-
   const [listItem, setListItem] = useState(modalItem)
 
   const buttonStyles = {

@@ -1,10 +1,10 @@
 import React, { useState }from 'react'
-import { doc, addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
 // import { v4 as uuidv4 } from 'uuid'
 
-const WaitlistForm = (closeForm) => {
+const WaitlistForm = ({closeForm}) => {
   const navigate = useNavigate()
   
   const [formData, setFormData] = useState({
@@ -33,8 +33,8 @@ const WaitlistForm = (closeForm) => {
       ...formData,
       timestamp: serverTimestamp()
     }
-    console.log('before adding')
     const waitlistRef = await addDoc(collection(db, 'waitlist-1'), dataCopy)
+    await closeForm(e)
     navigate("/firebase-waitlist")
   }
 
@@ -106,7 +106,8 @@ const WaitlistForm = (closeForm) => {
           />
         </span>
       </div>
-      <button type='submit' className='bg-purple-300 hover:bg-purple-400 mb-8 shadow-md hover:cursor-pointer         hover:shadow-lg px-8 py-4 text-xl uppercase font-bold text-gray-100 rounded-full' id="submit">Submit</button>
+      <button type='submit'
+        className='bg-purple-300 hover:bg-purple-400 mb-8 shadow-md hover:cursor-pointer         hover:shadow-lg px-8 py-4 text-xl uppercase font-bold text-gray-100 rounded-full' id="submit">Submit</button>
     </form>
   )
 }

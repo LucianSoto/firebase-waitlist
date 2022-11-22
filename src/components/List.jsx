@@ -45,21 +45,11 @@ const List = () => {
     setModalItem({ phone: phone, name: name, id: id })
   }
 
-  const closeModal = () => {
+  const closeModal = (e) => {
     setModal(!modal)
   }
 
   const onDelete = async () => {
-    console.log(modalItem.id, 'ID')
-    // const name = modalItem.name
-    // const collectionRef = collection(db, 'waitlist-1')
-    // const q = query(collectionRef, where("name", "==", name))
-    // const snapshot = await getDocs(q)
-    // // console.log(snapshot, "snapshot")
-    // const result = snapshot.doc.data()
-  
-    // console.log(result, 'result')
-    
     const docRef = doc(db, 'waitlist-1', modalItem.id)
     await deleteDoc(docRef)
     closeModal()
