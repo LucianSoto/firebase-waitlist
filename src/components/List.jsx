@@ -15,29 +15,29 @@ const List = () => {
   const [modalItem, setModalItem] = useState()
   
   useEffect(()=> {
-    // if(mounted.current === false) {
-    //   console.log('hi')
-    //   fetchList() 
-    //   mounted.current = true
-    // }
-    const fetchList = async () => {
-        const q = query(collection(db, 'waitlist-1'), orderBy("timestamp"))
-        const querySnap = await getDocs(q)
-        let listArr = []
-    
-        querySnap.forEach((doc) => {
-          const id = doc.id
-          const newDoc = doc.data()
-          newDoc["id"] = id
-          return listArr.push(
-            newDoc  
-          )
-        }) 
-        setList(listArr)
-        setIsLoading(false)
+    if(mounted.current === false) {
+      fetchList() 
+      mounted.current = true
     }
-    fetchList()
-  },[list])
+    // fetchList()
+  },[])
+  
+  const fetchList = async () => {
+      const q = query(collection(db, 'waitlist-1'), orderBy("timestamp"))
+      const querySnap = await getDocs(q)
+      let listArr = []
+  
+      querySnap.forEach((doc) => {
+        const id = doc.id
+        const newDoc = doc.data()
+        newDoc["id"] = id
+        return listArr.push(
+          newDoc  
+        )
+      }) 
+      setList(listArr)
+      setIsLoading(false)
+  }
 
   const showModal = (e, phone, name, id) => {
     e.preventDefault()
@@ -53,9 +53,9 @@ const List = () => {
     const docRef = doc(db, 'waitlist-1', modalItem.id)
     await deleteDoc(docRef)
     closeModal()
+    fetchList()
   }
 
-  console.log(list)
 
   return (
     <>

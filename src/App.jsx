@@ -11,7 +11,6 @@ function App() {
 
   useEffect(() => {
     if(mounted.current === false) {
-      console.log(form)
       mounted.current = true
     }
     
@@ -19,11 +18,8 @@ function App() {
 
   const closeForm = (e) => {
     e.preventDefault()
-    console.log('closing form')
     setForm(prevState => !prevState)
   }
-
-  console.log(form)
 
   return (
 // /////// Retrieve wiatlist by timestamp!!!!!!!!!???
