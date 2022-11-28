@@ -2,11 +2,11 @@ import React, {useState, useEffect, useRef} from 'react'
 import List from './components/List'
 import Modal from './components/Modal'
 import WaitlistForm from './components/WaitlistForm'
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, Navigate,  } from 'react-router-dom'
+import Edit from './components/Edit'
 
 function App() {
   const mounted = useRef(false)
-
   const [form, setForm] = useState(true)
 
   useEffect(() => {
@@ -14,10 +14,11 @@ function App() {
       mounted.current = true
     }
     
-  }, [form])
+  }, [])
 
-  const closeForm = (e) => {
-    e.preventDefault()
+  const closeForm = () => {
+    // e.preventDefault()
+    console.log('closing')
     setForm(prevState => !prevState)
   }
 
@@ -28,16 +29,10 @@ function App() {
         <header className=" mb-4 rounded-t-md">
           <h1 className='text-4xl font-bold mt-4'>Firebase Waitlist</h1>
         </header>
-        <Link 
-          id="button" 
-          to={form ? '/waitlist-form' : '/firebase-waitlist'}
-          // navigate to form
-          onClick={()=> setForm(prevState => !prevState)}
-          className={`py-2 px-8 mt-2 mb-8 ${form ? "bg-green-400  hover:bg-green-500" : "bg-red-400 hover:bg-red-500" } shadow-md hover:shadow-lg rounded-full text-lg uppercase tracking-widest text-gray-100 font-bold`}>{form? 'Join' : 'Back'}
-        </Link>
         <Routes>
           <Route exact path='/firebase-waitlist' element={<List/>} end/>
           <Route path='/waitlist-form' element={<WaitlistForm closeForm={closeForm}/>} />
+          <Route path="/edit/:id" element={<Edit closeForm={closeForm}/> } />
         </Routes>
       </div>
     </Router>

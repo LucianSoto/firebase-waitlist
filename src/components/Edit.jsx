@@ -1,11 +1,25 @@
-import React, { useState }from 'react'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import React, { useEffect, useState, useRef }from 'react'
+import { updateDoc, getDoc, serverTimestamp, doc } from 'firebase/firestore'
 import { db } from '../firebase.config'
-import { useNavigate, Link } from 'react-router-dom'
-// import { v4 as uuidv4 } from 'uuid'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 
-const WaitlistForm = ({closeForm}) => {
+const Edit = ({closeForm}) => {
+
+  const formStyles = {
+    input : 'w-3/4 px-4 py-2 mb-6 rounded-lg text-xl',
+    label : 'w-3/4 pl-2 mb-2 text-xl' 
+  }
+
+  const mounted = useRef(false)
   const navigate = useNavigate()
+  const {id} = useParams()
+
+  useEffect(()=>{
+    if(mounted.current === false) {
+      closeForm()
+      fetchCustomer()
+    }
+  }, [])
   
   const [formData, setFormData] = useState({
     name: '',
@@ -14,30 +28,33 @@ const WaitlistForm = ({closeForm}) => {
     ofAge: false,
   })
   
-  const formStyles = {
-    input : 'w-3/4 px-4 py-2 mb-6 rounded-lg text-xl',
-    label : 'w-3/4 pl-2 mb-2 text-xl' 
-  }
-
   const onChange = (e) => {
     const {name, value, } = e.target
-      setFormData((prevState) => ({
-        ...prevState, [name]: value
-      }))
+    setFormData((prevState) => ({
+      ...prevState, [name]: value
+    }))
+  }
+  
+  const fetchCustomer = async () => {
+    const docRef = doc(db, 'waitlist-1', id)
+    const docSnap = await getDoc(docRef)
+    if(docSnap.exists()) {
+      setFormData({...docSnap.data()})
     }
-
-
+  }
+  
   const submitForm = async (e) => {
     e.preventDefault()
     const dataCopy = {
       ...formData,
       timestamp: serverTimestamp()
     }
-    const waitlistRef = await addDoc(collection(db, 'waitlist-1'), dataCopy)
-    await closeForm(e)
+    
+    const docRef = doc(db, 'waitlist-1', id)
+    await updateDoc(docRef, dataCopy)
     navigate("/firebase-waitlist")
   }
-
+  
   return (
     <>
       <Link 
@@ -47,9 +64,9 @@ const WaitlistForm = ({closeForm}) => {
           Back
       </Link>
       <form
-        id="form" 
-        className='flex flex-col items-center bg-gray-100  w-5/6 rounded-md shadow-lg p-4 mb-8'
-        onSubmit={submitForm}
+      id="form" 
+      className='flex flex-col items-center bg-gray-100  w-5/6 rounded-md shadow-lg p-4 mb-8'
+      onSubmit={submitForm}
       >
         <h3 className='text-2xl font-medium mt-8 mb-8'>
           Join out waitlist
@@ -120,4 +137,4 @@ const WaitlistForm = ({closeForm}) => {
   )
 }
 
-export default WaitlistForm
+export default Edit
